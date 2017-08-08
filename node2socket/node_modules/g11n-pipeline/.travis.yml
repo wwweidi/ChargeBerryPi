@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+- '0.12'
+- '4'
+- '6'
+- '8'
+script:
+- npm install
+- curl $GP_FAKE_BROKER2 > local-credentials.json
+- if [[ $TRAVIS_NODE_VERSION == '6' ]]; then nyc npm test && nyc report --reporter=text-lcov
+  | coveralls; else npm test; fi
+env:
+  global:
+  - secure: fvzulZVjH3s1MjbmYL4qUvxI9NYq7AIt3ioPJC54fHgeHzINeDjvQFYtwVVSjTzeDsP/EcqdrTo8w9e8NRXJ/PUR17t6Q5Zlnvxj8VBPaqfZEK41RKf4CMnSTZwbPA/PHNGvmU5pu2646k+8ychnQ3jwkCDruVOBVCJwe3gRp0g=
+  - secure: HtHmDfZeyuVCifYk2oh/ilT3gSER2SnC4zwc1ve0oX98k7enm2yWsgka2M91RW53a1+1gTu2US7PM8yAfEkar6B7tBunfhm65+HnRYq0wmsDcGNzzKrIRk4REsrdY1tYLG1CNPsUCxX9dxBCdgHwAyrWGRapAkl2ivhBRgtgzWI=
+cache:
+  directories:
+  - node_modules
+  - ".nvm"
+addons:
+  coverity_scan:
+    project:
+      name: IBM-Bluemix/gp-js-client
+      version: 1.0
+      description: Globalization Pipeline Javascript SDK
+    notification_email: srl295@gmail.com
+    build_command_prepend: npm install
+    build_command: "--no-command --fs-capture-search ./lib"
+    branch_pattern: coverity_scan
+# this is a comment
