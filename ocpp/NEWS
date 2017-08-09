@@ -1,0 +1,153 @@
+09 oct 2013; ocppjs 1.0.2
+
+  * Added constraints in JSON Schema (enumerations, maxLength, etc)
+    documentation. Simulator now enforces these constraints when verifying
+    incoming messages.
+  * Added JSON Schema control for MeterValues & StopTransaction message.
+  * Fixed missing namespace for nested object in SOAP.
+  * Fixed missing value in the "To" header for SOAP remote actions.
+
+04 oct 2013; ocppjs 1.0.1
+
+  * Added JSON Schema for requests and responses in the documentation files.
+  * Changed the way XML attributes are mapped to JSON. In practice, this only
+    changes the format for OCPP1.5 MeterValues & StopTransaction request
+    messages.
+    The central system simulator doesn't enforce this format yet, and will
+    accept anything under the StopTransactionRequest.transactionData and
+    MeterValuesRequest.values fields when receiving a message.
+  * Added package.json file for easier installation.
+  * Fixed invalid JSON example for OCPP1.2 MeterValuesRequest.
+  * Fixed action name and namespaces issues with SOAP transport.
+
+03 jun 2013; ocppjs 1.0.0
+
+  * Fixed ocpp1.5 JSON payload structure for:
+    . GetConfiguration request: "key" was a string instead of an array of
+      strings
+    . GetConfiguration response: "unknownKey" was a string instead of an array
+      of strings
+    . MeterValues & StopTransaction request: "value" was an int instead of
+      an array of strings, "@value" was a object instead of an array of objects
+  * Added websocket protocol name when accepting a new connection.
+  * Added a plugin system allowing to define the behavior of a CS or CP
+    simulator:
+    . 'plugins', 'load' and 'unload' commands for listing, loading
+      and unloading plugins.
+    . Plugin API documentation and tutorial in
+      plugins/getting_started_with_plugins.html.
+    . 'cbxs' chargepoint plugin example with connectors management.
+  * Minor fixes
+
+02 may 2013; ocppjs 0.0.11
+
+  * Added: framework for writing unit tests and 4 example files (in test/).
+  * Payload errors are now supported in SOAP mode.
+  * 'send_raw' and 'remote_send_raw' commands are now available in SOAP mode.
+    . Added parameter -h for printing http headers.
+  * In SOAP mode, header 'From' retrieves the local IP address instead of using
+    'localhost'.
+
+22 apr 2013; ocppjs 0.0.10
+
+  * Added SOAP transport support in Central system simulator.
+  * Added SOAP remote actions support:
+    . Added parameter -r in 'start_cp' command, defining the listening
+      port for remote actions. If not defined, it defaults to the port specifed
+      in the 'wsa5:From' URL.
+    . Added parameter -f in 'start_cp' command, defining the "wsa5:From"
+      URL in SOAP header. If not defined, it defaults to
+      'http://localhost:random_port'.
+    . 'send' and 'send_raw' commands have been disabled for the SOAP mode.
+    . This version does not detect SOAP payload errors yet.
+
+09 apr 2013; ocppjs 0.0.9
+
+  * SOAP client integration:
+    . Requires third-party libraries: 'node-expat' and 'request'.
+    . Added parameter -t for the 'start_cp' command in order to choose the
+      simulator transport layer (websocket or SOAP).
+    . Added 'set print_xml' command for displaying SOAP envelopes in XML format.
+    . Remote actions and Central system simulator are not supported yet with
+      soap transport.
+  * New JSON attributes syntax: {"node":"value","@node":{"attr1": "value1"}}.
+
+14 mar 2013; ocppjs 0.0.8
+
+  * WebSocket ping enhancements :
+    . Added client websocket ping.
+    . Added parameter '-i' for the 'start_cp' command in order to set the
+      WebSocket ping frequency.
+    . Added 'websocket_ping_cs' and 'websocket_ping_cp' commands for manually
+      sending one WebSocket ping from a central system simulator or a charge
+      point simulator.
+    . Added 'set' command for modifying the WebSocket ping frequency without
+      interrupting the simulator (0 for disabling WebSocket pings).
+  * 'tns:MeterValue' type is now supported. doc/gir-ocppjs-doc.js has been
+  updated with the expected JSON structure for types with XML schema attributes
+  attributes. The MeterValue type in ocpp 1.5 is currently the only one with
+  such a structure.
+  * Added 'InternalError' support when a procedure raises an exception.
+  * Added payload error checking for CALLRESULT messages.
+  * Prompt '>' now shows up right after entering a command.
+
+07 mar 2013; ocppjs 0.0.7
+
+  * Payload parsing now supports complex types and simple type restrictions.
+  * Procedure call messages can be customized from command line interface using
+    the new 'argument=value' syntax.
+  * OCPP 1.2 & OCPP 1.5 commands are completely covered with the addition of
+    firmware and diagnostics messages.
+  * Enhancement of the command line interface reliability: bugfixes and
+    deletion of multiple spaces.
+  * Simulator is now tolerant to WSDL absence and can be launched from
+    any directory.
+
+27 feb 2013; ocppjs 0.0.6
+
+  * Basic payload parsing (Property/Occurence/TypeConstraintViolation for
+    simple types). Complex types and restrictions are not checked yet.
+  * Commands schema is now loaded from wsdl files. This requires:
+    . An additional third-party library: xml2js.
+    . Valid ocpp wsdl files in doc/wdsl subdirectory. They are provided in the
+      zip file.
+  * A CentralSystem simulator can now support multiple comma-separated protocol
+    versions on a single endpoint.
+  * New commands:
+    . 'send' & 'remote_send' to send a custom message in a valid envelope, to
+      simulate invalid procedure names and payloads.
+    . 'send_raw' & 'remote_send_raw' to send a custom string, to simulate
+      invalid envelopes.
+
+20 feb 2013; ocppjs 0.0.5
+
+  * Conformance to DRAFT1 specification.
+  * Updated command-line interface. start_cp & start_cs commands can now be
+    passed directly as shell arguments.
+  * Removed automatic bootnotification & heartbeat. All messages are
+    triggered manually (type 'help' to get the list), except websocket ping.
+  * Completed the command set to cover usual ocpp1.2 and ocpp1.5 commands (not
+    available yet: firmware & diagnotics messages).
+
+14 feb 2013; DRAFT1
+
+  * First public draft specificaton.
+  * Removed chargeBoxIdentity from message payload.
+
+01 feb 2013; ocppjs 0.0.4
+
+  * Added doc/gir-ocppjs-doc.js: autogenerate JSON examples from OCPP wsdl.
+
+23 jan 2013; ocppjs 0.0.3
+
+  * Added websocket ping interval in centralsystem simulator.
+  * Added websocket logging for ping/pong frames.
+
+11 jan 2013; ocppjs 0.0.2
+
+  * Updated logs.
+  * Bugfixes.
+
+28 dec 2012; ocppjs 0.0.1
+
+  * Initial version.
