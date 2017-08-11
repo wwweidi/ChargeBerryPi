@@ -41,7 +41,7 @@ function main() {
   OCPP.buildJSONSchemas();
 
   // launch the command line interface
-  UI.parse('start_cp ws://localhost:9000/simulator cp1');
+  UI.parse('start_cp ws://192.168.2.115:9000/simulator cp1');
   UI.parse('load rfid');
 }
 
