@@ -869,6 +869,24 @@ var UI = {
    *
    */
 
+  parse: function(line) {
+      var lineRaw = line;
+      line = UI.parseLineToTokens(line);
+
+      if(line.length == 0) {
+          return;
+      }
+
+      // strips \n
+      line[0] = line[0].replace('\n', '');
+
+      if(line[0] == "quit")
+        return;
+
+      if(!Plugins.callCommandHandlers(lineRaw, line))
+          UI.parseCommand(line);
+  },
+
   commandLine: function() {
     rl.setPrompt("> ");
     rl.prompt();

@@ -1,0 +1,1 @@
+simulate a smart meter in software by polling status of the pin that controls the charging.

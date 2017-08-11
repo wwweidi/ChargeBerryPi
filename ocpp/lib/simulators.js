@@ -183,6 +183,7 @@ ChargePointSimulator.prototype = {
 function commandCPtoCS(cpId, procName, args) {
   var prot = Utils.retrieveVersion(OCPP.SUB_PROTOCOL);
 
+
   if(cpId == -1) {
     cpId = Utils.getId(Simulators.chargePoints);
 
