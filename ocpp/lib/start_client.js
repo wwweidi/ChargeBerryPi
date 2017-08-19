@@ -44,6 +44,7 @@ function main() {
   var serverIp = process.env.SERVER;
   UI.parse('start_cp ws://' + serverIp + ':9000/simulator cp1');
   UI.parse('load rfid');
+  UI.parse('load meter');
 }
 
 exports.main = main;
