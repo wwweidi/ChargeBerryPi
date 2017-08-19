@@ -7,6 +7,9 @@
 // UNIX datagram sockets are unconnected and the client is not addressable.
  var unix = require('unix-dgram');
  var fs = require('fs');
+ var rpio = require('rpio');
+
+ rpio.open(40, rpio.OUTPUT, rpio.LOW);
  var SOCKNAME= '/tmp/python2ocpp';
 
  try { fs.unlinkSync(SOCKNAME); } catch (e) { /* swallow */ }
@@ -43,6 +46,10 @@ var plugin = {
 
         self.onResult('Authorize', function (values) {
             self.log('Authorize response:' + JSON.stringify(values));
+                rpio.write(40, rpio.HIGH);
+setTimeout(function() {
+                rpio.write(40, rpio.LOW);
+        }, 5000);
         });
     },
 

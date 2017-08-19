@@ -10,11 +10,12 @@
   },
   "main": "gir-ocppjs.js",
   "dependencies": {
-    "websocket": "~1.0.8",
-    "xml2js": "~0.2.2",
+    "jayschema": "~0.2.0",
     "node-expat": "~2.3.16",
     "request": "~2.16.2",
+    "rpio": "^0.9.17",
     "unix-dgram": "2.0.1",
-    "jayschema": "~0.2.0"
+    "websocket": "~1.0.8",
+    "xml2js": "~0.2.2"
   }
 }
