@@ -19,7 +19,11 @@ USB would be cool with Digispark
 
 ## Housekeeping
 
-- Autostart of the components
-- keep components alive via forever
-- save shutdown via button
-- feed the hardware watchdog
+TODO
+- [ ] Autostart of the components
+- [ ] keep components alive via forever
+- [ ] save shutdown via button
+- [ ] feed the hardware watchdog
+
+DONE
+- installed avahi https://www.elektronik-kompendium.de/sites/raspberry-pi/1912251.htm to let raspi discover as 'raspberry.local' in the local network through Zeroconf / Bonjour / Avahi 
